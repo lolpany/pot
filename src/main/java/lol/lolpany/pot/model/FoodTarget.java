@@ -6,6 +6,6 @@ public class FoodTarget {
     price;
     preparationTime;
     personalRating;
-    variability;
     NormalVeganVegetarian normalVeganVegetarian;
+    variability;
 }

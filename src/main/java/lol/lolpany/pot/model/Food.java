@@ -35,6 +35,7 @@ public class Food {
     double molybdenum;
     double selenium;
     double cobalt;
+    healthiness;
     double price;
     double preparationTime;
     double personalRating;
