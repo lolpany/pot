@@ -1,11 +1,14 @@
 package lol.lolpany.pot.model;
 
 public class FoodTarget {
-    double kkal;
-    healthiness;
-    price;
-    preparationTime;
-    personalRating;
+    WeightTarget weightTarget;
+    double kcal;
+    double calImportance;
+    double healthiness;
+    double price;
+    double priceImportance;
+    double preparationTime;
+    double personalRating;
     NormalVeganVegetarian normalVeganVegetarian;
-    variability;
+    double variability;
 }
