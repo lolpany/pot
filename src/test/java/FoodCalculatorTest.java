@@ -3,7 +3,6 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -15,7 +14,7 @@ public class FoodCalculatorTest {
     @Test
     public void testFoodCalculator() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600, 0.8, 0.9, 3000, 0.8, 3600, 0.9, 0,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.8, 0.9, 3000, 0.8, 3600, 0.9, 0,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
@@ -30,7 +29,6 @@ public class FoodCalculatorTest {
             food.setCarbohydrates(Double.parseDouble(record.get("carbohydrates")));
             foods.add(food);
         }
-
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods);
     }

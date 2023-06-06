@@ -8,6 +8,7 @@ public class Food {
     double proteins;
     double fats;
     double carbohydrates;
+    double ethanol;
     double vitaminA;
     double vitaminB1;
     double vitaminB3;

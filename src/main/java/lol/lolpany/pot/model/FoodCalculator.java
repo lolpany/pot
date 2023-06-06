@@ -42,8 +42,9 @@ public class FoodCalculator {
         return result;
     }
 
-    private double calculateScore(Person person, FoodTarget foodTarget, List<FoodAndQuantity> currentFoods) {
-        return 0;
+    // todo
+    private double calculateScore(Person person, FoodTarget foodTarget, List<FoodAndQuantity> foodsAndQuantities) {
+        return new CalCalculator().calculate(person, foodTarget.weightTarget, foodTarget.kcal, foodsAndQuantities);
     }
 
     private List<FoodAndQuantity> copyFoods(List<FoodAndQuantity> foodsAndQuantities) {

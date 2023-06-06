@@ -2,7 +2,7 @@ package lol.lolpany.pot.model;
 
 public class FoodTarget {
     WeightTarget weightTarget;
-    double kcal;
+    Double kcal;
     double calImportance;
     double healthiness;
     double price;
@@ -13,7 +13,7 @@ public class FoodTarget {
     NormalVeganVegetarian normalVeganVegetarian;
     double variability;
 
-    public FoodTarget(WeightTarget weightTarget, double kcal, double calImportance, double healthiness, double price,
+    public FoodTarget(WeightTarget weightTarget, Double kcal, double calImportance, double healthiness, double price,
                       double priceImportance, double preparationTime, double preparationTimeImportance,
                       double personalRatingImportance, NormalVeganVegetarian normalVeganVegetarian,
                       double variability) {
