@@ -1,6 +1,5 @@
 package lol.lolpany.pot.model;
 
-import java.time.Year;
 import java.util.List;
 
 import static lol.lolpany.pot.model.Constants.*;
@@ -33,7 +32,6 @@ public class CalCalculator {
     // todo
     private double kcalNormDetermination(Person person) {
         double result = 1500;
-        int age = Year.now().getValue() - person.birthYear;
         switch (person.sex) {
             case MALE -> {
 

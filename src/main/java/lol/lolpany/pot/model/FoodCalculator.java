@@ -1,14 +1,16 @@
 package lol.lolpany.pot.model;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FoodCalculator {
 
-    private final double QUANTITY_STEP = 0.05;
+    private final double QUANTITY_STEP = 0.5;
     private final int MAX_QUANTITY_MULTIPLIER = 20;
 
     public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods) {
+        person.age = Year.now().getValue() - person.birthYear;
         List<FoodAndQuantity> result = new ArrayList<>();
         double maxScore = -Double.MAX_VALUE;
         double currentScore;

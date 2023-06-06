@@ -3,6 +3,7 @@ package lol.lolpany.pot.model;
 public class Person {
     Sex sex;
     int birthYear;
+    int age;
     double height;
     double weight;
     ActivityLevel activityLevel;
