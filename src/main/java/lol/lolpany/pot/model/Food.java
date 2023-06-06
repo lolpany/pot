@@ -3,7 +3,7 @@ package lol.lolpany.pot.model;
 import java.util.Objects;
 
 public class Food {
-    int id;
+    long id;
     String name;
     double proteins;
     double fats;
@@ -35,11 +35,28 @@ public class Food {
     double molybdenum;
     double selenium;
     double cobalt;
-    healthiness;
+    double healthiness;
     double price;
     double preparationTime;
     double personalRating;
     NormalVeganVegetarian normalVeganVegetarian;
+
+    public Food(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public void setProteins(double proteins) {
+        this.proteins = proteins;
+    }
+
+    public void setFats(double fats) {
+        this.fats = fats;
+    }
+
+    public void setCarbohydrates(double carbohydrates) {
+        this.carbohydrates = carbohydrates;
+    }
 
     @Override
     public boolean equals(Object o) {
