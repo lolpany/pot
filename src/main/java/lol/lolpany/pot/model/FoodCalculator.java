@@ -6,10 +6,11 @@ import java.util.List;
 
 public class FoodCalculator {
 
-    private final double QUANTITY_STEP = 0.5;
-    private final int MAX_QUANTITY_MULTIPLIER = 20;
+    private final double QUANTITY_STEP = 0.2;
+    private final int MAX_QUANTITY_MULTIPLIER = 5;
 
     public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods) {
+        // for performance
         person.age = Year.now().getValue() - person.birthYear;
         List<FoodAndQuantity> result = new ArrayList<>();
         double maxScore = -Double.MAX_VALUE;
