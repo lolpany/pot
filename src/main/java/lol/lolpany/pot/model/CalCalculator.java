@@ -3,12 +3,10 @@ package lol.lolpany.pot.model;
 import java.time.Year;
 import java.util.List;
 
-import static lol.lolpany.pot.model.Constants.MAX_ASPECT_SCORE;
-import static lol.lolpany.pot.model.Constants.MIN_ASPECT_SCORE;
+import static lol.lolpany.pot.model.Constants.*;
 
 public class CalCalculator {
 
-    private final int KILOGRAM_COEFFICIENT = 10;
     private final int KCAL_IN_PROTEIN = 4;
     private final int KCAL_IN_FAT = 9;
     private final int KCAL_IN_CARBOHYDRATE = 4;
