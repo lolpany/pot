@@ -5,15 +5,15 @@ import java.util.List;
 
 public class FoodCalculator {
 
-    private final double QUANTITY_STEP = 0.1;
-    private final int MAX_QUANTITY_MULTIPLIER = 100;
+    private final double QUANTITY_STEP = 0.05;
+    private final int MAX_QUANTITY_MULTIPLIER = 20;
 
     public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods) {
         List<FoodAndQuantity> result = new ArrayList<>();
         double maxScore = -Double.MAX_VALUE;
         double currentScore;
         List<FoodAndQuantity> foodsAndQuantities = initFoodsQuantities(foods);
-        for (int i = 0; i < foods.size() * MAX_QUANTITY_MULTIPLIER; i++) {
+        for (int i = 0; i < Math.pow(MAX_QUANTITY_MULTIPLIER, foods.size()); i++) {
             int j = 0;
             while (j < foodsAndQuantities.size() && foodsAndQuantities.get(j).quantity >= QUANTITY_STEP * MAX_QUANTITY_MULTIPLIER) {
                 j++;
