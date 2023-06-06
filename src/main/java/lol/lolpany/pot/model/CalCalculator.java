@@ -13,6 +13,12 @@ public class CalCalculator {
     private final int KCAL_IN_FAT = 9;
     private final int KCAL_IN_CARBOHYDRATE = 4;
     private final int KCAL_IN_ETHANOL = 7;
+    private final double PROTEINS_PERCENT = 0.25;
+    private final double FATS_PERCENT = 0.15;
+    private final double CARBOHYDRATES_PERCENT = 0.6;
+    private static final int NUMBER_OF_NUTRIENTS = 3;
+    private static final double MAX_NUTRIENT_SCORE = MAX_ASPECT_SCORE / NUMBER_OF_NUTRIENTS;
+    private static final double MIN_NUTRIENT_SCORE = MIN_ASPECT_SCORE / NUMBER_OF_NUTRIENTS;
 
     public double calculate(Person person, WeightTarget weightTarget, Double kcal,
                             List<FoodAndQuantity> foodsAndQuantities) {
@@ -20,9 +26,11 @@ public class CalCalculator {
         double activityCoefficient = activityCoefficientDetermination(person.activityLevel);
         double weightTargetCoefficient = weightTargetCoefficientDetermination(weightTarget);
         double kcalTarget = kcal != null ? kcal : kcalNorm * activityCoefficient * weightTargetCoefficient;
-        double kcalInFood = kcalInFoodDetermination(foodsAndQuantities);
-        return calculateScore(kcalTarget, kcalInFood);
+        ProteinsFatsCarbohydrates nutrientsTarget = determineNutrientsTarget(kcalTarget);
+        ProteinsFatsCarbohydrates nutrientsInFood = determineNutrientsInFood(foodsAndQuantities);
+        return calculateScore(nutrientsTarget, nutrientsInFood);
     }
+
 
     // todo
     private double kcalNormDetermination(Person person) {
@@ -76,23 +84,38 @@ public class CalCalculator {
         return result;
     }
 
-    private double kcalInFoodDetermination(List<FoodAndQuantity> foodsAndQuantities) {
-        double result = 0;
+    private ProteinsFatsCarbohydrates determineNutrientsTarget(double kcalTarget) {
+        double proteinsTarget = PROTEINS_PERCENT * kcalTarget / KCAL_IN_PROTEIN;
+        double fatsTarget = FATS_PERCENT * kcalTarget / KCAL_IN_FAT;
+        ;
+        double carbohydratesTarget = CARBOHYDRATES_PERCENT * kcalTarget / KCAL_IN_CARBOHYDRATE;
+        return new ProteinsFatsCarbohydrates(proteinsTarget, fatsTarget, carbohydratesTarget);
+    }
+
+    private ProteinsFatsCarbohydrates determineNutrientsInFood(List<FoodAndQuantity> foodsAndQuantities) {
+        ProteinsFatsCarbohydrates result = new ProteinsFatsCarbohydrates(0, 0, 0);
         for (FoodAndQuantity foodAndQuantity : foodsAndQuantities) {
-            result += foodAndQuantity.food.proteins * KILOGRAM_COEFFICIENT * foodAndQuantity.quantity * KCAL_IN_PROTEIN;
-            result += foodAndQuantity.food.fats * KILOGRAM_COEFFICIENT * foodAndQuantity.quantity * KCAL_IN_FAT;
-            result += foodAndQuantity.food.carbohydrates * KILOGRAM_COEFFICIENT * foodAndQuantity.quantity * KCAL_IN_CARBOHYDRATE;
-            result += foodAndQuantity.food.ethanol * KILOGRAM_COEFFICIENT * foodAndQuantity.quantity * KCAL_IN_ETHANOL;
+            result.proteins += foodAndQuantity.food.proteins * KILOGRAM_COEFFICIENT * foodAndQuantity.quantity;
+            result.fats += foodAndQuantity.food.fats * KILOGRAM_COEFFICIENT * foodAndQuantity.quantity;
+            result.carbohydrates += foodAndQuantity.food.carbohydrates * KILOGRAM_COEFFICIENT * foodAndQuantity.quantity;
         }
         return result;
     }
 
-    private double calculateScore(double kcalTarget, double kcalInFood) {
+    private double calculateScore(ProteinsFatsCarbohydrates nutrientsTarget,
+                                  ProteinsFatsCarbohydrates nutrientsInFood) {
+        return calculateScore(nutrientsTarget.proteins, nutrientsInFood.proteins)
+                + calculateScore(nutrientsTarget.fats, nutrientsInFood.fats)
+                + calculateScore(nutrientsTarget.carbohydrates, nutrientsInFood.carbohydrates);
+    }
+
+    private double calculateScore(double nutrientTarget, double nutrientInFood) {
         double result;
-        if (kcalInFood < kcalTarget) {
-            result = MAX_ASPECT_SCORE * kcalInFood / kcalTarget;
+        if (nutrientInFood < nutrientTarget) {
+            result = MAX_NUTRIENT_SCORE * nutrientInFood / nutrientTarget;
         } else {
-            result = 2 * MAX_ASPECT_SCORE + MIN_ASPECT_SCORE - kcalInFood * (kcalTarget / -MIN_ASPECT_SCORE);
+            // todo
+            result = 2 * MAX_NUTRIENT_SCORE + MIN_NUTRIENT_SCORE - nutrientInFood * (nutrientTarget / -MIN_NUTRIENT_SCORE);
         }
         return result;
     }
