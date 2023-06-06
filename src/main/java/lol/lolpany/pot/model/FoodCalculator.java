@@ -6,8 +6,9 @@ import java.util.List;
 
 public class FoodCalculator {
 
-    private final double QUANTITY_STEP = 0.2;
+    private final double MAX_FOOD_QUANTITY = 1;
     private final int MAX_QUANTITY_MULTIPLIER = 5;
+    private final double QUANTITY_STEP = MAX_FOOD_QUANTITY / MAX_QUANTITY_MULTIPLIER;
 
     public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods) {
         // for performance
@@ -16,6 +17,7 @@ public class FoodCalculator {
         double maxScore = -Double.MAX_VALUE;
         double currentScore;
         List<FoodAndQuantity> foodsAndQuantities = initFoodsQuantities(foods);
+        double overallQuantity = 0;
         for (int i = 0; i < Math.pow(MAX_QUANTITY_MULTIPLIER, foods.size()); i++) {
             int j = 0;
             while (j < foodsAndQuantities.size() && foodsAndQuantities.get(j).quantity >= QUANTITY_STEP * MAX_QUANTITY_MULTIPLIER) {
@@ -25,13 +27,17 @@ public class FoodCalculator {
                 break;
             }
             for (int k = 0; k < j; k++) {
+                overallQuantity -= foodsAndQuantities.get(k).quantity;
                 foodsAndQuantities.get(k).quantity = 0;
             }
             foodsAndQuantities.get(j).quantity += QUANTITY_STEP;
-            currentScore = calculateScore(person, foodTarget, foodsAndQuantities);
-            if (currentScore > maxScore) {
-                maxScore = currentScore;
-                result = copyFoods(foodsAndQuantities);
+            overallQuantity += QUANTITY_STEP;
+            if (overallQuantity <= MAX_FOOD_QUANTITY) {
+                currentScore = calculateScore(person, foodTarget, foodsAndQuantities);
+                if (currentScore > maxScore) {
+                    maxScore = currentScore;
+                    result = copyFoods(foodsAndQuantities);
+                }
             }
         }
         return result;
