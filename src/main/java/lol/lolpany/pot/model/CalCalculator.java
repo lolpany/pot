@@ -83,7 +83,6 @@ public class CalCalculator {
     private ProteinsFatsCarbohydrates determineNutrientsTarget(double kcalTarget) {
         double proteinsTarget = PROTEINS_PERCENT * kcalTarget / KCAL_IN_PROTEIN;
         double fatsTarget = FATS_PERCENT * kcalTarget / KCAL_IN_FAT;
-        ;
         double carbohydratesTarget = CARBOHYDRATES_PERCENT * kcalTarget / KCAL_IN_CARBOHYDRATE;
         return new ProteinsFatsCarbohydrates(proteinsTarget, fatsTarget, carbohydratesTarget);
     }
