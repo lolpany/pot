@@ -18,9 +18,10 @@ public class FoodCalculator {
         double currentScore;
         List<FoodAndQuantity> foodsAndQuantities = initFoodsQuantities(foods);
         double overallQuantity = 0;
-        for (int i = 0; i < Math.pow(MAX_QUANTITY_MULTIPLIER, foods.size()); i++) {
+        double numberOfCombinations = Math.pow(MAX_QUANTITY_MULTIPLIER, foods.size());
+        for (int i = 0; i < numberOfCombinations; i++) {
             int j = 0;
-            while (j < foodsAndQuantities.size() && foodsAndQuantities.get(j).quantity >= QUANTITY_STEP * MAX_QUANTITY_MULTIPLIER) {
+            while (j < foodsAndQuantities.size() && foodsAndQuantities.get(j).quantity >= MAX_FOOD_QUANTITY) {
                 j++;
             }
             if (j >= foodsAndQuantities.size()) {
