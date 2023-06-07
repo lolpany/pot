@@ -11,10 +11,6 @@ import java.util.List;
 
 public class IndexedFoodCalculator {
 
-    private final double MAX_FOOD_QUANTITY = 1;
-    private final int MAX_QUANTITY_MULTIPLIER = 5;
-    private final double QUANTITY_STEP = MAX_FOOD_QUANTITY / MAX_QUANTITY_MULTIPLIER;
-
     public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods) throws IOException {
         // for performance
         person.age = Year.now().getValue() - person.birthYear;
@@ -22,9 +18,7 @@ public class IndexedFoodCalculator {
         double maxScore = -Double.MAX_VALUE;
         double currentScore;
         List<FoodAndQuantity> foodsAndQuantities = initFoodsQuantities(foods);
-        double overallQuantity = 0;
-        double numberOfCombinations = Math.pow(MAX_QUANTITY_MULTIPLIER, foods.size());
-        List<String> indexLines = FileUtils.readLines(new File("C:\\all\\projects\\pot\\src\\main\\resources\\index-partial.txt"), StandardCharsets.UTF_8);
+        List<String> indexLines = FileUtils.readLines(new File("C:\\all\\projects\\pot\\src\\main\\resources\\index-stored.txt"), StandardCharsets.UTF_8);
         for (String indexLine : indexLines) {
             String[] indexLineParts = indexLine.split(";");
 
@@ -38,7 +32,7 @@ public class IndexedFoodCalculator {
 //                indexString += a + ";" + foodAndQuantity.quantity + ";";
 //                a++;
 //            }
-//            FileUtils.write(new File("C:\all\projects\pot\src\main\resources\index.txt"), indexString + "\n", StandardCharsets.UTF_8, true);
+//            FileUtils.write(new File("C:\all\projects\pot\src\main\resources\index-generated.txt"), indexString + "\n", StandardCharsets.UTF_8, true);
 
 
             currentScore = calculateScore(person, foodTarget, foodsAndQuantities);
