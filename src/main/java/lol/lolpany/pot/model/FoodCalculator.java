@@ -1,5 +1,6 @@
 package lol.lolpany.pot.model;
 
+import java.io.IOException;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,38 +8,39 @@ import java.util.List;
 public class FoodCalculator {
 
     private final double MAX_FOOD_QUANTITY = 1;
-    private final int MAX_QUANTITY_MULTIPLIER = 5;
-    private final double QUANTITY_STEP = MAX_FOOD_QUANTITY / MAX_QUANTITY_MULTIPLIER;
+    private final int MAX_QUANTITY_MULTIPLIER = 4;
+    private final double QUANTITY_PART_SIZE = MAX_FOOD_QUANTITY / MAX_QUANTITY_MULTIPLIER;
 
-    public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods) {
+    public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods) throws IOException {
         // for performance
         person.age = Year.now().getValue() - person.birthYear;
         List<FoodAndQuantity> result = new ArrayList<>();
         double maxScore = -Double.MAX_VALUE;
         double currentScore;
         List<FoodAndQuantity> foodsAndQuantities = initFoodsQuantities(foods);
-        double overallQuantity = 0;
-        double numberOfCombinations = Math.pow(MAX_QUANTITY_MULTIPLIER, foods.size());
+        double numberOfCombinations = Math.pow(foods.size() + 1, MAX_QUANTITY_MULTIPLIER);
+        int[] quantityPartsAllocations = new int[MAX_QUANTITY_MULTIPLIER];
         for (int i = 0; i < numberOfCombinations; i++) {
             int j = 0;
-            while (j < foodsAndQuantities.size() && foodsAndQuantities.get(j).quantity >= MAX_FOOD_QUANTITY) {
+            while (j < MAX_QUANTITY_MULTIPLIER && quantityPartsAllocations[j] == foods.size()) {
                 j++;
             }
-            if (j >= foodsAndQuantities.size()) {
+            if (j >= MAX_QUANTITY_MULTIPLIER) {
                 break;
             }
             for (int k = 0; k < j; k++) {
-                overallQuantity -= foodsAndQuantities.get(k).quantity;
-                foodsAndQuantities.get(k).quantity = 0;
+                foodsAndQuantities.get(quantityPartsAllocations[k]-1).quantity -= QUANTITY_PART_SIZE;
+                quantityPartsAllocations[k] = 0;
             }
-            foodsAndQuantities.get(j).quantity += QUANTITY_STEP;
-            overallQuantity += QUANTITY_STEP;
-            if (overallQuantity <= MAX_FOOD_QUANTITY) {
-                currentScore = calculateScore(person, foodTarget, foodsAndQuantities);
-                if (currentScore > maxScore) {
-                    maxScore = currentScore;
-                    result = copyFoods(foodsAndQuantities);
-                }
+            quantityPartsAllocations[j]++;
+            if (quantityPartsAllocations[j] > 1) {
+                foodsAndQuantities.get(quantityPartsAllocations[j] - 2).quantity -= QUANTITY_PART_SIZE;
+            }
+            foodsAndQuantities.get(quantityPartsAllocations[j] - 1).quantity += QUANTITY_PART_SIZE;
+            currentScore = calculateScore(person, foodTarget, foodsAndQuantities);
+            if (currentScore > maxScore) {
+                maxScore = currentScore;
+                result = copyFoods(foodsAndQuantities);
             }
         }
         return result;
