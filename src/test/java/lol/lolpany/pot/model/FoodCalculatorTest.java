@@ -50,12 +50,12 @@ public class FoodCalculatorTest {
     @Test
     public void testFoodCalculatorWithPrice() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.8, 0.9, 100, 0.9, 3600, 0.9, 0,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.3, 0.9, 100, 0.9, 3600, 0.9, 0,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
         List<Food> foods = new ArrayList<>();
-        Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food.tsv");
+        Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food100.tsv");
         Iterable<CSVRecord> records = CSVFormat.TDF.builder().setHeader().build().parse(fileReader);
         long id = 0;
         for (CSVRecord record : records) {
