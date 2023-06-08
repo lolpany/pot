@@ -29,7 +29,7 @@ public class FoodCalculator {
                 break;
             }
             for (int k = 0; k < j; k++) {
-                foodsAndQuantities.get(quantityPartsAllocations[k]-1).quantity -= QUANTITY_PART_SIZE;
+                foodsAndQuantities.get(quantityPartsAllocations[k] - 1).quantity -= QUANTITY_PART_SIZE;
                 quantityPartsAllocations[k] = 0;
             }
             quantityPartsAllocations[j]++;
@@ -64,8 +64,9 @@ public class FoodCalculator {
     private List<FoodAndQuantity> copyFoods(List<FoodAndQuantity> foodsAndQuantities) {
         List<FoodAndQuantity> result = new ArrayList<>();
         for (FoodAndQuantity foodAndQuantity : foodsAndQuantities) {
-            if (foodAndQuantity.quantity > 0) {
-                result.add(new FoodAndQuantity(foodAndQuantity.food, foodAndQuantity.quantity));
+            double quantity = Math.round(foodAndQuantity.quantity * 100.0) / 100.0;
+            if (quantity > 0) {
+                result.add(new FoodAndQuantity(foodAndQuantity.food, quantity));
             }
         }
         return result;
