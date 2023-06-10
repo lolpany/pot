@@ -17,12 +17,12 @@ public class FoodCalculatorTest {
     @Test
     public void testFoodCalculatorWithCalories() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.8, 0.9, 100, 0, 3600, 0.9, 0,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.8, 0.9, 1000, 0.01, 3600, 0.9, 0.01,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
         List<Food> foods = new ArrayList<>();
-        Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food100.tsv");
+        Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food14.tsv");
         Iterable<CSVRecord> records = CSVFormat.TDF.builder().setHeader().build().parse(fileReader);
         long id = 0;
         for (CSVRecord record : records) {
@@ -35,25 +35,25 @@ public class FoodCalculatorTest {
         }
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods);
-        assertEquals("chicken breast", foodsAndQuantities.get(0).food.name);
+        assertEquals("duck, meat only, raw", foodsAndQuantities.get(0).food.name);
         assertEquals(0.25, foodsAndQuantities.get(0).quantity);
-        assertEquals("macaroni", foodsAndQuantities.get(1).food.name);
+        assertEquals("pasta, cooked", foodsAndQuantities.get(1).food.name);
         assertEquals(0.25, foodsAndQuantities.get(1).quantity);
-        assertEquals("eggs", foodsAndQuantities.get(2).food.name);
+        assertEquals("banana", foodsAndQuantities.get(2).food.name);
         assertEquals(0.25, foodsAndQuantities.get(2).quantity);
-        assertEquals("bananas", foodsAndQuantities.get(3).food.name);
+        assertEquals("beef", foodsAndQuantities.get(3).food.name);
         assertEquals(0.25, foodsAndQuantities.get(3).quantity);
     }
 
     @Test
     public void testFoodCalculatorWithPrice() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.3, 0.9, 100, 0.9, 3600, 0.9, 0,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.3, 0.9, 100, 0.9, 3600, 0.9, 0.01,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
         List<Food> foods = new ArrayList<>();
-        Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food100.tsv");
+        Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food14.tsv");
         Iterable<CSVRecord> records = CSVFormat.TDF.builder().setHeader().build().parse(fileReader);
         long id = 0;
         for (CSVRecord record : records) {
@@ -66,11 +66,11 @@ public class FoodCalculatorTest {
         }
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods);
-        assertEquals("macaroni", foodsAndQuantities.get(0).food.name);
+        assertEquals("pasta, cooked", foodsAndQuantities.get(0).food.name);
         assertEquals(0.25, foodsAndQuantities.get(0).quantity);
-        assertEquals("eggs", foodsAndQuantities.get(1).food.name);
+        assertEquals("chicken egg", foodsAndQuantities.get(1).food.name);
         assertEquals(0.25, foodsAndQuantities.get(1).quantity);
-        assertEquals("bananas", foodsAndQuantities.get(2).food.name);
+        assertEquals("banana", foodsAndQuantities.get(2).food.name);
         assertEquals(0.25, foodsAndQuantities.get(2).quantity);
     }
 

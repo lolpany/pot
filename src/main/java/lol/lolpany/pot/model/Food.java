@@ -11,6 +11,7 @@ public class Food {
     double ethanol;
     double vitaminA;
     double vitaminB1;
+    double vitaminB2;
     double vitaminB3;
     double vitaminB5;
     double vitaminB6;

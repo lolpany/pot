@@ -12,6 +12,7 @@ public class FoodCalculator {
     private final double QUANTITY_PART_SIZE = MAX_FOOD_QUANTITY / MAX_QUANTITY_MULTIPLIER;
 
     public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods) throws IOException {
+        validateParameters(foodTarget);
         // for performance
         person.age = Year.now().getValue() - person.birthYear;
         List<FoodAndQuantity> result = new ArrayList<>();
@@ -44,6 +45,18 @@ public class FoodCalculator {
             }
         }
         return result;
+    }
+
+    private void validateParameters(FoodTarget foodTarget) {
+        if (foodTarget.calImportance < Constants.MIN_ASPECT_COEFFICIENT) {
+            throw new IllegalArgumentException();
+        }
+        if (foodTarget.priceImportance < Constants.MIN_ASPECT_COEFFICIENT) {
+            throw new IllegalArgumentException();
+        }
+        if (foodTarget.personalRatingImportance < Constants.MIN_ASPECT_COEFFICIENT) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private List<FoodAndQuantity> initFoodsQuantities(List<Food> foods) {

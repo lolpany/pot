@@ -1,6 +1,7 @@
 package lol.lolpany.pot.model;
 
 public class Person {
+    long id;
     Sex sex;
     int birthYear;
     int age;

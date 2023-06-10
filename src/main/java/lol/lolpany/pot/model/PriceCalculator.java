@@ -14,7 +14,7 @@ public class PriceCalculator {
     private double determineFoodPrice(List<FoodAndQuantity> foodsAndQuantities) {
         double result = 0;
         for (FoodAndQuantity foodAndQuantity : foodsAndQuantities) {
-            result += foodAndQuantity.food.price * foodAndQuantity.quantity;
+            result += foodAndQuantity.food.price * KILOGRAM_COEFFICIENT * foodAndQuantity.quantity;
         }
         return result;
     }
