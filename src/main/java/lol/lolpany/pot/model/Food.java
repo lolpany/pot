@@ -64,6 +64,10 @@ public class Food {
         this.price = price;
     }
 
+    public void setPersonalRating(double personalRating) {
+        this.personalRating = personalRating;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,4 +80,5 @@ public class Food {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

@@ -71,7 +71,9 @@ public class FoodCalculator {
     private double calculateScore(Person person, FoodTarget foodTarget, List<FoodAndQuantity> foodsAndQuantities) {
         double calScore = new CalCalculator().calculate(person, foodTarget.weightTarget, foodTarget.kcal, foodsAndQuantities);
         double priceScore = new PriceCalculator().calculate(foodTarget.price, foodsAndQuantities);
-        return foodTarget.calImportance * calScore + foodTarget.priceImportance * priceScore;
+        double personalRatingScore = new PersonalRatingCalculator().calculate(foodsAndQuantities);
+        return foodTarget.calImportance * calScore + foodTarget.priceImportance * priceScore +
+                foodTarget.personalRatingImportance * personalRatingScore;
     }
 
     private List<FoodAndQuantity> copyFoods(List<FoodAndQuantity> foodsAndQuantities) {
