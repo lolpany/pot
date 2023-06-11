@@ -46,6 +46,44 @@ public class FoodCalculator {
                 result = copyFoods(foodsAndQuantities);
             }
         }
+        return tuneResult(person, foodTarget, prohibitedFood, result);
+    }
+
+    private final double MAX_FOOD_QUANTITY2 = 0.3;
+    private final int MAX_QUANTITY_MULTIPLIER2 = 3;
+    private final double QUANTITY_PART_SIZE2 = MAX_FOOD_QUANTITY2 / MAX_QUANTITY_MULTIPLIER2;
+
+    public List<FoodAndQuantity> tuneResult(Person person, FoodTarget foodTarget,
+                                            Set<Long> prohibitedFood, List<FoodAndQuantity> preliminaryResult) throws IOException {
+        List<FoodAndQuantity> result = new ArrayList<>();
+        double maxScore = -Double.MAX_VALUE;
+        double currentScore;
+        List<FoodAndQuantity> foodsAndQuantities = initFoodsQuantities2(preliminaryResult);
+        double numberOfCombinations = Math.pow(preliminaryResult.size() + 1, MAX_QUANTITY_MULTIPLIER2);
+        int[] quantityPartsAllocations = new int[MAX_QUANTITY_MULTIPLIER2];
+        for (int i = 0; i < numberOfCombinations; i++) {
+            int j = 0;
+            while (j < MAX_QUANTITY_MULTIPLIER2 && quantityPartsAllocations[j] == preliminaryResult.size()) {
+                j++;
+            }
+            if (j >= MAX_QUANTITY_MULTIPLIER2) {
+                break;
+            }
+            for (int k = 0; k < j; k++) {
+                foodsAndQuantities.get(quantityPartsAllocations[k] - 1).quantity -= QUANTITY_PART_SIZE2;
+                quantityPartsAllocations[k] = 0;
+            }
+            quantityPartsAllocations[j]++;
+            if (quantityPartsAllocations[j] > 1) {
+                foodsAndQuantities.get(quantityPartsAllocations[j] - 2).quantity -= QUANTITY_PART_SIZE2;
+            }
+            foodsAndQuantities.get(quantityPartsAllocations[j] - 1).quantity += QUANTITY_PART_SIZE2;
+            currentScore = calculateScore(person, foodTarget, foodsAndQuantities, prohibitedFood);
+            if (currentScore > maxScore) {
+                maxScore = currentScore;
+                result = copyFoods2(foodsAndQuantities);
+            }
+        }
         return result;
     }
 
@@ -69,6 +107,14 @@ public class FoodCalculator {
         return result;
     }
 
+    private List<FoodAndQuantity> initFoodsQuantities2(List<FoodAndQuantity> foodsAndQuantities) {
+        List<FoodAndQuantity> result = new ArrayList<>(foodsAndQuantities.size());
+        for (FoodAndQuantity foodAndQuantity : foodsAndQuantities) {
+            result.add(new FoodAndQuantity(foodAndQuantity.food, foodAndQuantity.quantity));
+        }
+        return result;
+    }
+
     // todo
     private double calculateScore(Person person, FoodTarget foodTarget, List<FoodAndQuantity> foodsAndQuantities,
                                   Set<Long> prohibitedFood) {
@@ -80,6 +126,15 @@ public class FoodCalculator {
     }
 
     private List<FoodAndQuantity> copyFoods(List<FoodAndQuantity> foodsAndQuantities) {
+        List<FoodAndQuantity> result = new ArrayList<>();
+        for (FoodAndQuantity foodAndQuantity : foodsAndQuantities) {
+            double quantity = Math.round(foodAndQuantity.quantity * 100.0) / 100.0;
+            result.add(new FoodAndQuantity(foodAndQuantity.food, quantity));
+        }
+        return result;
+    }
+
+    private List<FoodAndQuantity> copyFoods2(List<FoodAndQuantity> foodsAndQuantities) {
         List<FoodAndQuantity> result = new ArrayList<>();
         for (FoodAndQuantity foodAndQuantity : foodsAndQuantities) {
             double quantity = Math.round(foodAndQuantity.quantity * 100.0) / 100.0;
