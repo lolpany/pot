@@ -51,9 +51,9 @@ public class FoodCalculatorTest {
     }
 
     @Test
-    public void testPriceCalculation() throws IOException {
+    public void testCaloriesAndPriceCalculation() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.3, 0.9, 100, 0.9, 3600, 0.9, 0.01,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 100, 1, 3600, 0.9, 0.01,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
