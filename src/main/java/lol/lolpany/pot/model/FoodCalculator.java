@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class FoodCalculator {
 
@@ -11,7 +12,8 @@ public class FoodCalculator {
     private final int MAX_QUANTITY_MULTIPLIER = 4;
     private final double QUANTITY_PART_SIZE = MAX_FOOD_QUANTITY / MAX_QUANTITY_MULTIPLIER;
 
-    public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods) throws IOException {
+    public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods,
+                                           Set<Long> prohibitedFood) throws IOException {
         validateParameters(foodTarget);
         // for performance
         person.age = Year.now().getValue() - person.birthYear;
@@ -38,7 +40,7 @@ public class FoodCalculator {
                 foodsAndQuantities.get(quantityPartsAllocations[j] - 2).quantity -= QUANTITY_PART_SIZE;
             }
             foodsAndQuantities.get(quantityPartsAllocations[j] - 1).quantity += QUANTITY_PART_SIZE;
-            currentScore = calculateScore(person, foodTarget, foodsAndQuantities);
+            currentScore = calculateScore(person, foodTarget, foodsAndQuantities, prohibitedFood);
             if (currentScore > maxScore) {
                 maxScore = currentScore;
                 result = copyFoods(foodsAndQuantities);
@@ -68,10 +70,11 @@ public class FoodCalculator {
     }
 
     // todo
-    private double calculateScore(Person person, FoodTarget foodTarget, List<FoodAndQuantity> foodsAndQuantities) {
+    private double calculateScore(Person person, FoodTarget foodTarget, List<FoodAndQuantity> foodsAndQuantities,
+                                  Set<Long> prohibitedFood) {
         double calScore = new CalCalculator().calculate(person, foodTarget.weightTarget, foodTarget.kcal, foodsAndQuantities);
         double priceScore = new PriceCalculator().calculate(foodTarget.price, foodsAndQuantities);
-        double personalRatingScore = new PersonalRatingCalculator().calculate(foodsAndQuantities);
+        double personalRatingScore = new PersonalRatingCalculator().calculate(foodsAndQuantities, prohibitedFood);
         return foodTarget.calImportance * calScore + foodTarget.priceImportance * priceScore +
                 foodTarget.personalRatingImportance * personalRatingScore;
     }
