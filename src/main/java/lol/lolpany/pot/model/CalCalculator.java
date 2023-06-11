@@ -110,10 +110,11 @@ public class CalCalculator {
             result = MIN_NUTRIENT_SCORE;
         } else if (nutrientInFood >= 0.5 * nutrientTarget && nutrientInFood < nutrientTarget) {
             result = MAX_NUTRIENT_SCORE * nutrientInFood / nutrientTarget;
+        } else if (nutrientInFood >= nutrientTarget && nutrientInFood < 1.2 * nutrientTarget) {
+            result = MAX_NUTRIENT_SCORE / 2;
         } else {
             // todo
-            result = Math.max(2 * MAX_NUTRIENT_SCORE + MIN_NUTRIENT_SCORE
-                    - nutrientInFood * (-MIN_NUTRIENT_SCORE + MAX_NUTRIENT_SCORE / nutrientTarget), MIN_NUTRIENT_SCORE);
+            result = Math.max(2 * MAX_NUTRIENT_SCORE + MIN_NUTRIENT_SCORE - nutrientInFood * (-MIN_NUTRIENT_SCORE + MAX_NUTRIENT_SCORE / nutrientTarget), MIN_NUTRIENT_SCORE);
         }
         return result;
     }
