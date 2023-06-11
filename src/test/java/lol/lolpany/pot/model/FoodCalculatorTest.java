@@ -100,11 +100,15 @@ public class FoodCalculatorTest {
         assertEquals(0.25, foodsAndQuantities.get(0).quantity);
     }
 
+    private FoodTarget createPersonalRatingAndCaloriesAndPriceFoodTarget() {
+        return new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 100, 1, 3600, 0.9, 1,
+                NormalVeganVegetarian.NORMAL, 0);
+    }
+
     @Test
     public void testPersonalRatingAndCaloriesAndPriceCalculation() throws IOException {
-        Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 100, 1, 3600, 0.9, 1,
-                NormalVeganVegetarian.NORMAL, 0);
+        Person person = createPerson();
+        FoodTarget foodTarget = createPersonalRatingAndCaloriesAndPriceFoodTarget();
         FoodCalculator foodCalculator = new FoodCalculator();
 
         List<Food> foods = readFoods();
@@ -121,14 +125,13 @@ public class FoodCalculatorTest {
 
     @Test
     public void testProhibitedFoodCalculation() throws IOException {
-        Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 100, 1, 3600, 0.9, 1,
-                NormalVeganVegetarian.NORMAL, 0);
+        Person person = createPerson();
+        FoodTarget foodTarget = createPersonalRatingAndCaloriesAndPriceFoodTarget();
         FoodCalculator foodCalculator = new FoodCalculator();
 
         List<Food> foods = readFoods();
         long potatoId = -1;
-        for (Food food: foods) {
+        for (Food food : foods) {
             if ("potato".equals(food.name)) {
                 food.id = potatoId;
             }
