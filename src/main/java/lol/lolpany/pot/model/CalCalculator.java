@@ -106,7 +106,9 @@ public class CalCalculator {
 
     private double calculateScore(double nutrientTarget, double nutrientInFood) {
         double result;
-        if (nutrientInFood < nutrientTarget) {
+        if (nutrientInFood < 0.5 * nutrientTarget) {
+            result = MIN_NUTRIENT_SCORE;
+        } else if (nutrientInFood >= 0.5 * nutrientTarget && nutrientInFood < nutrientTarget) {
             result = MAX_NUTRIENT_SCORE * nutrientInFood / nutrientTarget;
         } else {
             // todo

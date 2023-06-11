@@ -145,5 +145,7 @@ public class FoodCalculatorTest {
         assertEquals(0.25, foodsAndQuantities.get(1).quantity);
         assertEquals("banana", foodsAndQuantities.get(2).food.name);
         assertEquals(0.25, foodsAndQuantities.get(2).quantity);
+        assertEquals("salmon", foodsAndQuantities.get(3).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(3).quantity);
     }
 }
