@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lol.lolpany.pot.model.PersonalRatingCalculator.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PersonalRatingCalculatorTest {
@@ -14,28 +15,66 @@ public class PersonalRatingCalculatorTest {
     public void testMaxScore() {
         List<FoodAndQuantity> foodsQuantities = new ArrayList<>();
         Food orange = new Food(1L, "orange");
-        orange.setPersonalRating(10);
+        orange.setPersonalRating(MAX_PERSONAL_RATING);
         FoodAndQuantity orangeQuantity = new FoodAndQuantity(orange, 0.3);
         foodsQuantities.add(orangeQuantity);
         Food apple = new Food(1L, "apple");
-        apple.setPersonalRating(10);
+        apple.setPersonalRating(MAX_PERSONAL_RATING);
         FoodAndQuantity appleQuantity = new FoodAndQuantity(apple, 0.3);
         foodsQuantities.add(appleQuantity);
         Food kiwifruit = new Food(1L, "kiwifruit");
-        kiwifruit.setPersonalRating(10);
+        kiwifruit.setPersonalRating(MAX_PERSONAL_RATING);
         FoodAndQuantity kiwifruitQuantity = new FoodAndQuantity(kiwifruit, 0.3);
         foodsQuantities.add(kiwifruitQuantity);
+        assertEquals(Constants.MAX_ASPECT_SCORE, new PersonalRatingCalculator().calculate(foodsQuantities, Collections.emptySet()));
+
+        foodsQuantities.clear();
+        foodsQuantities.add(orangeQuantity);
         assertEquals(Constants.MAX_ASPECT_SCORE, new PersonalRatingCalculator().calculate(foodsQuantities, Collections.emptySet()));
     }
 
     @Test
     public void testZeroScore() {
+        List<FoodAndQuantity> foodsQuantities = new ArrayList<>();
+        Food orange = new Food(1L, "orange");
+        orange.setPersonalRating(MIN_POSITIVE_PERSONAL_RATING);
+        FoodAndQuantity orangeQuantity = new FoodAndQuantity(orange, 0.3);
+        foodsQuantities.add(orangeQuantity);
+        Food apple = new Food(1L, "apple");
+        apple.setPersonalRating(MIN_POSITIVE_PERSONAL_RATING);
+        FoodAndQuantity appleQuantity = new FoodAndQuantity(apple, 0.3);
+        foodsQuantities.add(appleQuantity);
+        Food kiwifruit = new Food(1L, "kiwifruit");
+        kiwifruit.setPersonalRating(MIN_POSITIVE_PERSONAL_RATING);
+        FoodAndQuantity kiwifruitQuantity = new FoodAndQuantity(kiwifruit, 0.3);
+        foodsQuantities.add(kiwifruitQuantity);
+        assertEquals(0, new PersonalRatingCalculator().calculate(foodsQuantities, Collections.emptySet()));
 
+        foodsQuantities.clear();
+        foodsQuantities.add(orangeQuantity);
+        assertEquals(0, new PersonalRatingCalculator().calculate(foodsQuantities, Collections.emptySet()));
     }
 
     @Test
     public void testMinScore() {
+        List<FoodAndQuantity> foodsQuantities = new ArrayList<>();
+        Food orange = new Food(1L, "orange");
+        orange.setPersonalRating(MIN_PERSONAL_RATING);
+        FoodAndQuantity orangeQuantity = new FoodAndQuantity(orange, 0.3);
+        foodsQuantities.add(orangeQuantity);
+        Food apple = new Food(1L, "apple");
+        apple.setPersonalRating(MIN_PERSONAL_RATING);
+        FoodAndQuantity appleQuantity = new FoodAndQuantity(apple, 0.3);
+        foodsQuantities.add(appleQuantity);
+        Food kiwifruit = new Food(1L, "kiwifruit");
+        kiwifruit.setPersonalRating(MIN_PERSONAL_RATING);
+        FoodAndQuantity kiwifruitQuantity = new FoodAndQuantity(kiwifruit, 0.3);
+        foodsQuantities.add(kiwifruitQuantity);
+        assertEquals(Constants.MIN_ASPECT_SCORE, new PersonalRatingCalculator().calculate(foodsQuantities, Collections.emptySet()));
 
+        foodsQuantities.clear();
+        foodsQuantities.add(orangeQuantity);
+        assertEquals(Constants.MIN_ASPECT_SCORE, new PersonalRatingCalculator().calculate(foodsQuantities, Collections.emptySet()));
     }
 
 }
