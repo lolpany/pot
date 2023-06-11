@@ -9,7 +9,7 @@ public class PersonalRatingCalculator {
 
     static final double MIN_PERSONAL_RATING = 0;
     static final double MAX_PERSONAL_RATING = 10;
-    static final double MIN_POSITIVE_PERSONAL_RATING = 5;
+    static final double MIN_POSITIVE_PERSONAL_RATING = 0;
 
     double calculate(List<FoodAndQuantity> foodsAndQuantities, Set<Long> prohibitedFood) {
         double totalQuantity = 0;
