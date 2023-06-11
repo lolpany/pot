@@ -117,6 +117,7 @@ public class FoodCalculatorTest {
         Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food14.tsv");
         Iterable<CSVRecord> records = CSVFormat.TDF.builder().setHeader().build().parse(fileReader);
         long id = 0;
+        long potatoId = -1;
         for (CSVRecord record : records) {
             Food food = new Food(id++, record.get("name"));
             food.setProteins(Double.parseDouble(record.get("proteins")));
@@ -124,10 +125,13 @@ public class FoodCalculatorTest {
             food.setCarbohydrates(Double.parseDouble(record.get("carbohydrates")));
             food.setPrice(Double.parseDouble(record.get("price")));
             food.setPersonalRating(Double.parseDouble(record.get("personalRating")));
+            if ("potato".equals(food.name)) {
+                food.id = potatoId;
+            }
             foods.add(food);
         }
 
-        List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.singleton(12L));
+        List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.singleton(potatoId));
         assertEquals("pasta, cooked", foodsAndQuantities.get(0).food.name);
         assertEquals(0.25, foodsAndQuantities.get(0).quantity);
         assertEquals("chicken egg", foodsAndQuantities.get(1).food.name);
