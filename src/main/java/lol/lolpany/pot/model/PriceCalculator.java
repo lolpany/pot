@@ -25,7 +25,7 @@ public class PriceCalculator {
             result = MAX_ASPECT_SCORE;
         } else {
             // todo
-            result = 2 * MAX_ASPECT_SCORE + MIN_ASPECT_SCORE - foodPrice * (-MIN_ASPECT_SCORE / priceTarget);
+            result = Math.max(2 * MAX_ASPECT_SCORE + MIN_ASPECT_SCORE - foodPrice * (-MIN_ASPECT_SCORE / priceTarget), MIN_ASPECT_SCORE);
         }
         return result;
     }
