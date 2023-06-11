@@ -110,7 +110,7 @@ public class CalCalculator {
             result = MAX_NUTRIENT_SCORE * nutrientInFood / nutrientTarget;
         } else {
             // todo
-            result = 2 * MAX_NUTRIENT_SCORE + MIN_NUTRIENT_SCORE - nutrientInFood * (-MIN_NUTRIENT_SCORE / nutrientTarget);
+            result = Math.max(2 * MAX_NUTRIENT_SCORE + MIN_NUTRIENT_SCORE - nutrientInFood * (-MIN_NUTRIENT_SCORE / nutrientTarget), MIN_ASPECT_SCORE);
         }
         return result;
     }
