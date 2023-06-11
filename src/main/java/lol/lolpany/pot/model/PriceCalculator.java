@@ -21,11 +21,11 @@ public class PriceCalculator {
 
     private double calculateScore(double priceTarget, double foodPrice) {
         double result;
-        if (foodPrice < priceTarget) {
+        if (foodPrice <= priceTarget) {
             result = MAX_ASPECT_SCORE;
         } else {
             // todo
-            result = Math.max(2 * MAX_ASPECT_SCORE + MIN_ASPECT_SCORE - foodPrice * (-MIN_ASPECT_SCORE / priceTarget), MIN_ASPECT_SCORE);
+            result = Math.max(2 * MAX_ASPECT_SCORE + MIN_ASPECT_SCORE - foodPrice * (-MIN_ASPECT_SCORE + MAX_ASPECT_SCORE / priceTarget), MIN_ASPECT_SCORE);
         }
         return result;
     }
