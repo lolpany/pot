@@ -77,4 +77,23 @@ public class PersonalRatingCalculatorTest {
         assertEquals(Constants.MIN_ASPECT_SCORE, new PersonalRatingCalculator().calculate(foodsQuantities, Collections.emptySet()));
     }
 
+    @Test
+    public void testProhibitedFood() {
+        List<FoodAndQuantity> foodsQuantities = new ArrayList<>();
+        final long riceId = 1L;
+        Food rice = new Food(riceId, "rice");
+        rice.setPersonalRating(MIN_PERSONAL_RATING);
+        FoodAndQuantity riceQuantity = new FoodAndQuantity(rice, 0.3);
+        foodsQuantities.add(riceQuantity);
+        Food apple = new Food(2L, "apple");
+        apple.setPersonalRating(MIN_PERSONAL_RATING);
+        FoodAndQuantity appleQuantity = new FoodAndQuantity(apple, 0.3);
+        foodsQuantities.add(appleQuantity);
+        Food kiwifruit = new Food(3L, "kiwifruit");
+        kiwifruit.setPersonalRating(MIN_PERSONAL_RATING);
+        FoodAndQuantity kiwifruitQuantity = new FoodAndQuantity(kiwifruit, 0.3);
+        foodsQuantities.add(kiwifruitQuantity);
+        assertEquals(Constants.PROHIBITIVE_SCORE, new PersonalRatingCalculator().calculate(foodsQuantities, Collections.singleton(riceId)));
+    }
+
 }
