@@ -15,6 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FoodCalculatorTest {
 
+    private Person createPerson() {
+        return new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
+    }
+
     private List<Food> readFoods() throws IOException {
         List<Food> result = new ArrayList<>();
         Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food14.tsv");
@@ -85,7 +89,21 @@ public class FoodCalculatorTest {
     @Test
     public void testPersonalRatingCalculation() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 100, 0.3, 3600, 0.9, 1,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.01, 0.9, 100, 0.01, 3600, 0.9, 1,
+                NormalVeganVegetarian.NORMAL, 0);
+        FoodCalculator foodCalculator = new FoodCalculator();
+
+        List<Food> foods = readFoods();
+
+        List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
+        assertEquals("chicken egg", foodsAndQuantities.get(0).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(0).quantity);
+    }
+
+    @Test
+    public void testPersonalRatingAndCaloriesAndPriceCalculation() throws IOException {
+        Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 100, 1, 3600, 0.9, 1,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
@@ -104,7 +122,7 @@ public class FoodCalculatorTest {
     @Test
     public void testProhibitedFoodCalculation() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 100, 0.1, 3600, 0.9, 1,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 100, 1, 3600, 0.9, 1,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
