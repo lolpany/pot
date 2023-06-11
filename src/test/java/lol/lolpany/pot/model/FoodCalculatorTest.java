@@ -80,7 +80,7 @@ public class FoodCalculatorTest {
     @Test
     public void testPersonalRatingCalculation() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.3, 0.9, 100, 0.3, 3600, 0.9, 1,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 100, 0.3, 3600, 0.9, 1,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
@@ -99,17 +99,19 @@ public class FoodCalculatorTest {
         }
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
-        assertEquals("chicken egg", foodsAndQuantities.get(0).food.name);
+        assertEquals("pasta, cooked", foodsAndQuantities.get(0).food.name);
         assertEquals(0.25, foodsAndQuantities.get(0).quantity);
-        assertEquals("potato", foodsAndQuantities.get(1).food.name);
-        assertEquals(0.75, foodsAndQuantities.get(1).quantity);
+        assertEquals("chicken egg", foodsAndQuantities.get(1).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(1).quantity);
+        assertEquals("potato", foodsAndQuantities.get(2).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(2).quantity);
     }
 
 
     @Test
     public void testProhibitedFoodCalculation() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.3, 0.9, 100, 0.3, 3600, 0.9, 1,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 100, 0.1, 3600, 0.9, 1,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
@@ -136,7 +138,7 @@ public class FoodCalculatorTest {
         assertEquals(0.25, foodsAndQuantities.get(0).quantity);
         assertEquals("chicken egg", foodsAndQuantities.get(1).food.name);
         assertEquals(0.25, foodsAndQuantities.get(1).quantity);
-        assertEquals("cucumber", foodsAndQuantities.get(2).food.name);
-        assertEquals(0.5, foodsAndQuantities.get(2).quantity);
+        assertEquals("banana", foodsAndQuantities.get(2).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(2).quantity);
     }
 }
