@@ -1,6 +1,5 @@
 package lol.lolpany.pot.model;
 
-import java.io.IOException;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +11,30 @@ public class FoodCalculator {
     private final int MAX_QUANTITY_MULTIPLIER = 4;
     private final double QUANTITY_PART_SIZE = MAX_FOOD_QUANTITY / MAX_QUANTITY_MULTIPLIER;
 
-    private final double MAX_FOOD_QUANTITY2 = 0.3;
-    private final int MAX_QUANTITY_MULTIPLIER2 = 3;
+    private final double MAX_FOOD_QUANTITY2 = 0.4;
+    private final int MAX_QUANTITY_MULTIPLIER2 = 4;
     private final double QUANTITY_PART_SIZE2 = MAX_FOOD_QUANTITY2 / MAX_QUANTITY_MULTIPLIER2;
+    private final double MINIMAL_PART_SIZE = 0.1;
 
     public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods,
-                                           Set<Long> prohibitedFood) throws IOException {
+                                           Set<Long> prohibitedFood) {
         validateParameters(foodTarget);
         // for performance
         person.age = Year.now().getValue() - person.birthYear;
 
         List<FoodAndQuantity> result = calculate(person, foodTarget, prohibitedFood, initFoodsQuantities(foods), MAX_QUANTITY_MULTIPLIER, QUANTITY_PART_SIZE);
         result = calculate(person, foodTarget, prohibitedFood, result, MAX_QUANTITY_MULTIPLIER2, QUANTITY_PART_SIZE2);
-        return filterFoodQuantities(result);
+        result = filterFoodQuantities(result);
+        double maxQuantity = 0;
+        for (FoodAndQuantity foodAndQuantity : result) {
+            if (foodAndQuantity.quantity > maxQuantity) {
+                maxQuantity = foodAndQuantity.quantity;
+                foodAndQuantity.quantity = 0;
+            }
+        }
+        result = filterFoodQuantities(calculate(person, foodTarget, prohibitedFood, result,
+                Math.toIntExact(Math.round(maxQuantity / MINIMAL_PART_SIZE)), MINIMAL_PART_SIZE));
+        return result;
     }
 
     public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget,
