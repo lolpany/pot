@@ -48,10 +48,12 @@ public class FoodCalculatorTest {
         assertEquals(0.25, foodsAndQuantities.get(0).quantity);
         assertEquals("pasta, cooked", foodsAndQuantities.get(1).food.name);
         assertEquals(0.25, foodsAndQuantities.get(1).quantity);
-        assertEquals("banana", foodsAndQuantities.get(2).food.name);
-        assertEquals(0.25, foodsAndQuantities.get(2).quantity);
-        assertEquals("beef", foodsAndQuantities.get(3).food.name);
+        assertEquals("milk 1.8", foodsAndQuantities.get(2).food.name);
+        assertEquals(0.1, foodsAndQuantities.get(2).quantity);
+        assertEquals("banana", foodsAndQuantities.get(3).food.name);
         assertEquals(0.25, foodsAndQuantities.get(3).quantity);
+        assertEquals("beef", foodsAndQuantities.get(4).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(4).quantity);
     }
 
     @Test
@@ -97,7 +99,7 @@ public class FoodCalculatorTest {
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
         assertEquals("chicken egg", foodsAndQuantities.get(0).food.name);
-        assertEquals(0.25, foodsAndQuantities.get(0).quantity);
+        assertEquals(0.55, foodsAndQuantities.get(0).quantity);
     }
 
     private FoodTarget createPersonalRatingAndCaloriesAndPriceFoodTarget() {
@@ -116,12 +118,14 @@ public class FoodCalculatorTest {
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
         assertEquals("duck, meat only, raw", foodsAndQuantities.get(0).food.name);
         assertEquals(0.25, foodsAndQuantities.get(0).quantity);
-        assertEquals("bread", foodsAndQuantities.get(1).food.name);
-        assertEquals(0.25, foodsAndQuantities.get(1).quantity);
-        assertEquals("salmon", foodsAndQuantities.get(2).food.name);
+        assertEquals("pasta, cooked", foodsAndQuantities.get(1).food.name);
+        assertEquals(0.1, foodsAndQuantities.get(1).quantity);
+        assertEquals("bread", foodsAndQuantities.get(2).food.name);
         assertEquals(0.25, foodsAndQuantities.get(2).quantity);
-        assertEquals("potato", foodsAndQuantities.get(3).food.name);
+        assertEquals("salmon", foodsAndQuantities.get(3).food.name);
         assertEquals(0.25, foodsAndQuantities.get(3).quantity);
+        assertEquals("potato", foodsAndQuantities.get(4).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(4).quantity);
     }
 
 
@@ -144,8 +148,10 @@ public class FoodCalculatorTest {
         assertEquals("bread", foodsAndQuantities.get(1).food.name);
         assertEquals(0.25, foodsAndQuantities.get(1).quantity);
         assertEquals("banana", foodsAndQuantities.get(2).food.name);
-        assertEquals(0.25, foodsAndQuantities.get(2).quantity);
+        assertEquals(0.45, foodsAndQuantities.get(2).quantity);
         assertEquals("salmon", foodsAndQuantities.get(3).food.name);
         assertEquals(0.25, foodsAndQuantities.get(3).quantity);
+        assertEquals("cucumber", foodsAndQuantities.get(4).food.name);
+        assertEquals(0.1, foodsAndQuantities.get(4).quantity);
     }
 }
