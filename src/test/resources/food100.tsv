@@ -1,100 +1,100 @@
-name	proteins	fats	carbohydrates	price
-"chicken breast"	25	0	0	400
-macaroni	0	0	70	42
-bread	0	5	50	23
-pizza	10	10	30	700
-eggs	10	10	0	93
-rice	0	0	70	70
-milk 1.8	3	1.8	4.7	60
-bananas	0	0	23	100
-cheese	26	26	0	800
-fish	16	1	0	800
-chocolate	5	30	58	700
-beef	20	2.5	0	870
-potato	0	0	17	80
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
-cucumber	0	0	3.6	130
+name	proteins	fats	carbohydrates	price	personalRating
+"chicken breast"	25	0	0	400	4
+macaroni	0	0	70	42	4
+bread	0	5	50	23	4
+pizza	10	10	30	700	4
+eggs	10	10	0	93	4
+rice	0	0	70	70	4
+milk 1.8	3	1.8	4.7	60	4
+bananas	0	0	23	100	4
+cheese	26	26	0	800	4
+fish	16	1	0	800	4
+chocolate	5	30	58	700	4
+beef	20	2.5	0	870	4
+potato	0	0	17	80	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
+cucumber	0	0	3.6	130	4
