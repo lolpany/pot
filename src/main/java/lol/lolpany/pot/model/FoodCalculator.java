@@ -30,7 +30,7 @@ public class FoodCalculator {
     public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget,
                                            Set<Long> prohibitedFood,
                                            List<FoodAndQuantity> foodsAndQuantities, int maxQuantityMultiplier,
-                                           double quantityPartSize) throws IOException {
+                                           double quantityPartSize) {
         List<FoodAndQuantity> result = new ArrayList<>();
         double maxScore = -Double.MAX_VALUE;
         double currentScore;
