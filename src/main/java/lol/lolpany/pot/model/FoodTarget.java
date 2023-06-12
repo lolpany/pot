@@ -4,6 +4,7 @@ public class FoodTarget {
     WeightTarget weightTarget;
     Double kcal;
     double calImportance;
+    double vitaminsAndMineralsImportance;
     double healthiness;
     double price;
     double priceImportance;
@@ -13,13 +14,15 @@ public class FoodTarget {
     NormalVeganVegetarian normalVeganVegetarian;
     double variability;
 
-    public FoodTarget(WeightTarget weightTarget, Double kcal, double calImportance, double healthiness, double price,
+    public FoodTarget(WeightTarget weightTarget, Double kcal, double calImportance,
+                      double vitaminsAndMineralsImportance, double healthiness, double price,
                       double priceImportance, double preparationTime, double preparationTimeImportance,
                       double personalRatingImportance, NormalVeganVegetarian normalVeganVegetarian,
                       double variability) {
         this.weightTarget = weightTarget;
         this.kcal = kcal;
         this.calImportance = calImportance;
+        this.vitaminsAndMineralsImportance = vitaminsAndMineralsImportance;
         this.healthiness = healthiness;
         this.price = price;
         this.priceImportance = priceImportance;

@@ -76,6 +76,9 @@ public class FoodCalculator {
         if (foodTarget.calImportance < Constants.MIN_ASPECT_COEFFICIENT) {
             throw new IllegalArgumentException();
         }
+        if (foodTarget.vitaminsAndMineralsImportance < Constants.MIN_ASPECT_COEFFICIENT) {
+            throw new IllegalArgumentException();
+        }
         if (foodTarget.priceImportance < Constants.MIN_ASPECT_COEFFICIENT) {
             throw new IllegalArgumentException();
         }
@@ -96,10 +99,11 @@ public class FoodCalculator {
     private double calculateScore(Person person, FoodTarget foodTarget, List<FoodAndQuantity> foodsAndQuantities,
                                   Set<Long> prohibitedFood) {
         double calScore = new CalCalculator().calculate(person, foodTarget.weightTarget, foodTarget.kcal, foodsAndQuantities);
+        double vitaminsAndMineralsScore = new VitaminsAndMineralsCalculator().calculate(person, foodsAndQuantities);
         double priceScore = new PriceCalculator().calculate(foodTarget.price, foodsAndQuantities);
         double personalRatingScore = new PersonalRatingCalculator().calculate(foodsAndQuantities, prohibitedFood);
-        return foodTarget.calImportance * calScore + foodTarget.priceImportance * priceScore +
-                foodTarget.personalRatingImportance * personalRatingScore;
+        return foodTarget.calImportance * calScore + foodTarget.vitaminsAndMineralsImportance * vitaminsAndMineralsScore
+                + foodTarget.priceImportance * priceScore + foodTarget.personalRatingImportance * personalRatingScore;
     }
 
     private List<FoodAndQuantity> copyFoods(List<FoodAndQuantity> foodsAndQuantities) {

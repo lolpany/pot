@@ -21,7 +21,7 @@ public class FoodCalculatorTest {
 
     private List<Food> readFoods() throws IOException {
         List<Food> result = new ArrayList<>();
-        Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food14.tsv");
+        Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food50test.tsv");
         Iterable<CSVRecord> records = CSVFormat.TDF.builder().setHeader().build().parse(fileReader);
         long id = 0;
         for (CSVRecord record : records) {
@@ -39,7 +39,7 @@ public class FoodCalculatorTest {
     @Test
     public void testCaloriesCalculation() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 1, 0.01, 3600, 0.9, 0.01,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.01, 0.9, 1, 0.01, 3600, 0.9, 0.01,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
         List<Food> foods = readFoods();
@@ -59,7 +59,7 @@ public class FoodCalculatorTest {
     @Test
     public void testPriceCalculation() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.01, 0.9, 50, 1, 3600, 0.9, 0.01,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.01, 0.01, 0.9, 50, 1, 3600, 0.9, 0.01,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
@@ -77,7 +77,7 @@ public class FoodCalculatorTest {
     @Test
     public void testCaloriesAndPriceCalculation() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 50, 1, 3600, 0.9, 0.01,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.01, 0.9, 50, 1, 3600, 0.9, 0.01,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
@@ -97,7 +97,7 @@ public class FoodCalculatorTest {
     @Test
     public void testPersonalRatingCalculation() throws IOException {
         Person person = new Person(Sex.MALE, 1986, 0.17, 70, ActivityLevel.SEDENTARY);
-        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.01, 0.9, 100, 0.01, 3600, 0.9, 1,
+        FoodTarget foodTarget = new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 0.01, 0.01, 0.9, 100, 0.01, 3600, 0.9, 1,
                 NormalVeganVegetarian.NORMAL, 0);
         FoodCalculator foodCalculator = new FoodCalculator();
 
@@ -109,7 +109,7 @@ public class FoodCalculatorTest {
     }
 
     private FoodTarget createPersonalRatingAndCaloriesAndPriceFoodTarget() {
-        return new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.9, 500, 1, 3600, 0.9, 1,
+        return new FoodTarget(WeightTarget.STAY_SAME, 1600.0, 1, 0.01, 0.9, 500, 1, 3600, 0.9, 1,
                 NormalVeganVegetarian.NORMAL, 0);
     }
 
