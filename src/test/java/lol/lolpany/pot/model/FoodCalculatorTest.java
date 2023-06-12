@@ -21,7 +21,7 @@ public class FoodCalculatorTest {
 
     private List<Food> readFoods() throws IOException {
         List<Food> result = new ArrayList<>();
-        Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food50test.tsv");
+        Reader fileReader = new FileReader("C:\\all\\projects\\pot\\src\\test\\resources\\food14.tsv");
         Iterable<CSVRecord> records = CSVFormat.TDF.builder().setHeader().build().parse(fileReader);
         long id = 0;
         for (CSVRecord record : records) {
@@ -44,16 +44,14 @@ public class FoodCalculatorTest {
         FoodCalculator foodCalculator = new FoodCalculator();
         List<Food> foods = readFoods();
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
-        assertEquals("duck, meat only, raw", foodsAndQuantities.get(0).food.name);
-        assertEquals(0.2, foodsAndQuantities.get(0).quantity);
-        assertEquals("pasta, cooked", foodsAndQuantities.get(1).food.name);
+        assertEquals("chicken breast, braised", foodsAndQuantities.get(0).food.name);
+        assertEquals(0.3, foodsAndQuantities.get(0).quantity);
+        assertEquals("rice, white, raw", foodsAndQuantities.get(1).food.name);
         assertEquals(0.25, foodsAndQuantities.get(1).quantity);
-        assertEquals("milk 1.8", foodsAndQuantities.get(2).food.name);
+        assertEquals("milk, 3.25% milkfat", foodsAndQuantities.get(2).food.name);
         assertEquals(0.1, foodsAndQuantities.get(2).quantity);
-        assertEquals("banana", foodsAndQuantities.get(3).food.name);
-        assertEquals(0.25, foodsAndQuantities.get(3).quantity);
-        assertEquals("beef", foodsAndQuantities.get(4).food.name);
-        assertEquals(0.25, foodsAndQuantities.get(4).quantity);
+        assertEquals("cucumber", foodsAndQuantities.get(3).food.name);
+        assertEquals(0.5, foodsAndQuantities.get(3).quantity);
     }
 
     @Test
@@ -66,12 +64,10 @@ public class FoodCalculatorTest {
         List<Food> foods = readFoods();
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
-        assertEquals("pasta, cooked", foodsAndQuantities.get(0).food.name);
-        assertEquals(0.2, foodsAndQuantities.get(0).quantity);
-        assertEquals("chicken egg", foodsAndQuantities.get(1).food.name);
-        assertEquals(0.25, foodsAndQuantities.get(1).quantity);
-        assertEquals("potato", foodsAndQuantities.get(2).food.name);
-        assertEquals(0.2, foodsAndQuantities.get(2).quantity);
+        assertEquals("pasta, dry", foodsAndQuantities.get(0).food.name);
+        assertEquals(0.3, foodsAndQuantities.get(0).quantity);
+        assertEquals("milk, 3.25% milkfat", foodsAndQuantities.get(1).food.name);
+        assertEquals(0.3, foodsAndQuantities.get(1).quantity);
     }
 
     @Test
@@ -84,14 +80,12 @@ public class FoodCalculatorTest {
         List<Food> foods = readFoods();
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
-        assertEquals("pasta, cooked", foodsAndQuantities.get(0).food.name);
-        assertEquals(0.2, foodsAndQuantities.get(0).quantity);
-        assertEquals("chicken egg", foodsAndQuantities.get(1).food.name);
-        assertEquals(0.25, foodsAndQuantities.get(1).quantity);
-        assertEquals("banana", foodsAndQuantities.get(2).food.name);
+        assertEquals("bread, white", foodsAndQuantities.get(0).food.name);
+        assertEquals(0.3, foodsAndQuantities.get(0).quantity);
+        assertEquals("rice, white, raw", foodsAndQuantities.get(1).food.name);
+        assertEquals(0.1, foodsAndQuantities.get(1).quantity);
+        assertEquals("milk, 3.25% milkfat", foodsAndQuantities.get(2).food.name);
         assertEquals(0.1, foodsAndQuantities.get(2).quantity);
-        assertEquals("potato", foodsAndQuantities.get(3).food.name);
-        assertEquals(0.1, foodsAndQuantities.get(3).quantity);
     }
 
     @Test
@@ -105,7 +99,7 @@ public class FoodCalculatorTest {
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
         assertEquals("chicken egg", foodsAndQuantities.get(0).food.name);
-        assertEquals(0.2, foodsAndQuantities.get(0).quantity);
+        assertEquals(0.7, foodsAndQuantities.get(0).quantity);
     }
 
     private FoodTarget createPersonalRatingAndCaloriesAndPriceFoodTarget() {
@@ -123,11 +117,17 @@ public class FoodCalculatorTest {
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
         assertEquals("duck, meat only, raw", foodsAndQuantities.get(0).food.name);
-        assertEquals(0.1, foodsAndQuantities.get(0).quantity);
-        assertEquals("bread", foodsAndQuantities.get(1).food.name);
-        assertEquals(0.45, foodsAndQuantities.get(1).quantity);
-        assertEquals("salmon", foodsAndQuantities.get(2).food.name);
-        assertEquals(0.45, foodsAndQuantities.get(2).quantity);
+        assertEquals(0.2, foodsAndQuantities.get(0).quantity);
+        assertEquals("pasta, dry", foodsAndQuantities.get(1).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(1).quantity);
+        assertEquals("milk, 3.25% milkfat", foodsAndQuantities.get(2).food.name);
+        assertEquals(0.1, foodsAndQuantities.get(2).quantity);
+        assertEquals("salmon", foodsAndQuantities.get(3).food.name);
+        assertEquals(0.35, foodsAndQuantities.get(3).quantity);
+        assertEquals("potato", foodsAndQuantities.get(4).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(4).quantity);
+        assertEquals("cucumber", foodsAndQuantities.get(5).food.name);
+        assertEquals(0.1, foodsAndQuantities.get(5).quantity);
     }
 
 
@@ -140,18 +140,18 @@ public class FoodCalculatorTest {
         List<Food> foods = readFoods();
         long potatoId = -1;
         for (Food food : foods) {
-            if ("bread".equals(food.name)) {
+            if ("potato".equals(food.name)) {
                 food.id = potatoId;
             }
         }
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.singleton(potatoId));
         assertEquals("duck, meat only, raw", foodsAndQuantities.get(0).food.name);
-        assertEquals(0.2, foodsAndQuantities.get(0).quantity);
-        assertEquals("pasta, cooked", foodsAndQuantities.get(1).food.name);
-        assertEquals(0.25, foodsAndQuantities.get(1).quantity);
-        assertEquals("milk 1.8", foodsAndQuantities.get(2).food.name);
-        assertEquals(0.2, foodsAndQuantities.get(2).quantity);
-        assertEquals("salmon", foodsAndQuantities.get(3).food.name);
-        assertEquals(0.35, foodsAndQuantities.get(3).quantity);
+        assertEquals(0.1, foodsAndQuantities.get(0).quantity);
+        assertEquals("bread, white", foodsAndQuantities.get(1).food.name);
+        assertEquals(0.45, foodsAndQuantities.get(1).quantity);
+        assertEquals("salmon", foodsAndQuantities.get(2).food.name);
+        assertEquals(0.45, foodsAndQuantities.get(2).quantity);
+        assertEquals("cucumber", foodsAndQuantities.get(3).food.name);
+        assertEquals(0.1, foodsAndQuantities.get(3).quantity);
     }
 }
