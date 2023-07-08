@@ -50,8 +50,10 @@ public class FoodCalculatorTest {
         assertEquals(0.25, foodsAndQuantities.get(1).quantity);
         assertEquals("milk, 3.25% milkfat", foodsAndQuantities.get(2).food.name);
         assertEquals(0.1, foodsAndQuantities.get(2).quantity);
-        assertEquals("cucumber", foodsAndQuantities.get(3).food.name);
-        assertEquals(0.5, foodsAndQuantities.get(3).quantity);
+        assertEquals("oranges, navels", foodsAndQuantities.get(3).food.name);
+        assertEquals(0.2, foodsAndQuantities.get(3).quantity);
+        assertEquals("spinach, raw", foodsAndQuantities.get(4).food.name);
+        assertEquals(0.1, foodsAndQuantities.get(4).quantity);
     }
 
     @Test
@@ -80,11 +82,11 @@ public class FoodCalculatorTest {
         List<Food> foods = readFoods();
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
-        assertEquals("bread, white", foodsAndQuantities.get(0).food.name);
-        assertEquals(0.3, foodsAndQuantities.get(0).quantity);
-        assertEquals("rice, white, raw", foodsAndQuantities.get(1).food.name);
-        assertEquals(0.1, foodsAndQuantities.get(1).quantity);
-        assertEquals("milk, 3.25% milkfat", foodsAndQuantities.get(2).food.name);
+        assertEquals("rice, white, raw", foodsAndQuantities.get(0).food.name);
+        assertEquals(0.2, foodsAndQuantities.get(0).quantity);
+        assertEquals("milk, 3.25% milkfat", foodsAndQuantities.get(1).food.name);
+        assertEquals(0.3, foodsAndQuantities.get(1).quantity);
+        assertEquals("salt, iodized", foodsAndQuantities.get(2).food.name);
         assertEquals(0.1, foodsAndQuantities.get(2).quantity);
     }
 
@@ -117,17 +119,15 @@ public class FoodCalculatorTest {
 
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.emptySet());
         assertEquals("duck, meat only, raw", foodsAndQuantities.get(0).food.name);
-        assertEquals(0.2, foodsAndQuantities.get(0).quantity);
+        assertEquals(0.3, foodsAndQuantities.get(0).quantity);
         assertEquals("pasta, dry", foodsAndQuantities.get(1).food.name);
         assertEquals(0.25, foodsAndQuantities.get(1).quantity);
         assertEquals("milk, 3.25% milkfat", foodsAndQuantities.get(2).food.name);
-        assertEquals(0.1, foodsAndQuantities.get(2).quantity);
-        assertEquals("salmon", foodsAndQuantities.get(3).food.name);
-        assertEquals(0.35, foodsAndQuantities.get(3).quantity);
-        assertEquals("potato", foodsAndQuantities.get(4).food.name);
-        assertEquals(0.25, foodsAndQuantities.get(4).quantity);
-        assertEquals("cucumber", foodsAndQuantities.get(5).food.name);
-        assertEquals(0.1, foodsAndQuantities.get(5).quantity);
+        assertEquals(0.25, foodsAndQuantities.get(2).quantity);
+        assertEquals("potato", foodsAndQuantities.get(3).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(3).quantity);
+        assertEquals("salt, iodized", foodsAndQuantities.get(4).food.name);
+        assertEquals(0.1, foodsAndQuantities.get(4).quantity);
     }
 
 
@@ -145,13 +145,13 @@ public class FoodCalculatorTest {
             }
         }
         List<FoodAndQuantity> foodsAndQuantities = foodCalculator.calculate(person, foodTarget, foods, Collections.singleton(potatoId));
-        assertEquals("duck, meat only, raw", foodsAndQuantities.get(0).food.name);
-        assertEquals(0.1, foodsAndQuantities.get(0).quantity);
+        assertEquals("chicken breast, braised", foodsAndQuantities.get(0).food.name);
+        assertEquals(0.2, foodsAndQuantities.get(0).quantity);
         assertEquals("bread, white", foodsAndQuantities.get(1).food.name);
-        assertEquals(0.45, foodsAndQuantities.get(1).quantity);
-        assertEquals("salmon", foodsAndQuantities.get(2).food.name);
-        assertEquals(0.45, foodsAndQuantities.get(2).quantity);
-        assertEquals("cucumber", foodsAndQuantities.get(3).food.name);
-        assertEquals(0.1, foodsAndQuantities.get(3).quantity);
+        assertEquals(0.35, foodsAndQuantities.get(1).quantity);
+        assertEquals("milk, 3.25% milkfat", foodsAndQuantities.get(2).food.name);
+        assertEquals(0.25, foodsAndQuantities.get(2).quantity);
+        assertEquals("banana", foodsAndQuantities.get(3).food.name);
+        assertEquals(0.2, foodsAndQuantities.get(3).quantity);
     }
 }
