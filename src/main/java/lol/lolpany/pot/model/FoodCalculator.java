@@ -7,14 +7,8 @@ import java.util.Set;
 
 public class FoodCalculator {
 
-    private final double MAX_FOOD_QUANTITY = 1;
-    private final int MAX_QUANTITY_MULTIPLIER = 4;
-    private final double QUANTITY_PART_SIZE = MAX_FOOD_QUANTITY / MAX_QUANTITY_MULTIPLIER;
-
-    private final double MAX_FOOD_QUANTITY2 = 0.4;
-    private final int MAX_QUANTITY_MULTIPLIER2 = 4;
-    private final double QUANTITY_PART_SIZE2 = MAX_FOOD_QUANTITY2 / MAX_QUANTITY_MULTIPLIER2;
-    private final double MINIMAL_PART_SIZE = 0.1;
+    private final double[] FOOD_QUANTITIES = {1, 0.25, 0.1, 0.05, 0.001};
+    private final int QUANTITY_MULTIPLIER = 4;
 
     public List<FoodAndQuantity> calculate(Person person, FoodTarget foodTarget, List<Food> foods,
                                            Set<Long> prohibitedFood) {
@@ -22,18 +16,11 @@ public class FoodCalculator {
         // for performance
         person.age = Year.now().getValue() - person.birthYear;
 
-        List<FoodAndQuantity> result = calculate(person, foodTarget, prohibitedFood, initFoodsQuantities(foods), MAX_QUANTITY_MULTIPLIER, QUANTITY_PART_SIZE);
-        result = calculate(person, foodTarget, prohibitedFood, result, MAX_QUANTITY_MULTIPLIER2, QUANTITY_PART_SIZE2);
-        result = filterFoodQuantities(result);
-        double maxQuantity = 0;
-        for (FoodAndQuantity foodAndQuantity : result) {
-            if (foodAndQuantity.quantity > maxQuantity) {
-                maxQuantity = foodAndQuantity.quantity;
-                foodAndQuantity.quantity = 0;
-            }
+        List<FoodAndQuantity> result = initFoodsQuantities(foods);
+        for (int i = 0; i < FOOD_QUANTITIES.length; i++) {
+            result = calculate(person, foodTarget, prohibitedFood, result, QUANTITY_MULTIPLIER, FOOD_QUANTITIES[i]);
         }
-        result = filterFoodQuantities(calculate(person, foodTarget, prohibitedFood, result,
-                Math.toIntExact(Math.round(maxQuantity / MINIMAL_PART_SIZE)), MINIMAL_PART_SIZE));
+        result = filterFoodQuantities(result);
         return result;
     }
 
